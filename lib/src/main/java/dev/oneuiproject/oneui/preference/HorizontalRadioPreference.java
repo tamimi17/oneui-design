@@ -345,7 +345,7 @@ public class HorizontalRadioPreference extends Preference {
             var5.setTypeface(Typeface.create("sec-roboto-light", var14 ? Typeface.BOLD : Typeface.NORMAL));
             if (var4 != null) {
                 var4.setSelected(var14);
-                var4.setTypeface(Typeface.create("sec-roboto-light", var14 ? 1 : 0));
+            var4.setTypeface(Typeface.create("sec-roboto-light", var14 ? Typeface.BOLD : Typeface.NORMAL));
             }
 
             if (this.mIsColorFilterEnabled && var6 != null) {
