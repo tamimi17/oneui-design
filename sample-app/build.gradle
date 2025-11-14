@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-// Exclude Google AndroidX.
+// Exclude Google AndroidX.u
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
