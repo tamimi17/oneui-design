@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.oneuiapp'
+    namespace 'dev.oneuiproject.oneuiexample'
     compileSdk 36
 
     buildFeatures {
