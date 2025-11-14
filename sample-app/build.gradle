@@ -2,14 +2,14 @@ plugins {
     id 'com.android.application'
 }
 
-// Exclude Google AndroidX.u
+// Exclude Google AndroidX
 configurations.all {
     exclude group: 'androidx.appcompat', module: 'appcompat'
     exclude group: 'androidx.core', module: 'core'
 }
 
 android {
-    compileSdk target_sdk
+    compileSdk target_sd
 
     defaultConfig {
         // Use Samsung internal package name to enable theming.
