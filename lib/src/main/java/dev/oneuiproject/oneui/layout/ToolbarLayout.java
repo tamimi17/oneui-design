@@ -1049,25 +1049,32 @@ public class ToolbarLayout extends LinearLayout {
         public void onOffsetChanged(AppBarLayout layout, int verticalOffset) {
             if (mActionModeToolbar.getVisibility() == View.VISIBLE) {
                 int layoutPosition = Math.abs(mAppBarLayout.getTop());
-                float alphaRange = ((float) mCollapsingToolbarLayout.getHeight()) * 0.17999999f;
-                float toolbarTitleAlphaStart = ((float) mCollapsingToolbarLayout.getHeight()) * 0.35f;
+                float collapsingHeight = (float) mCollapsingToolbarLayout.getHeight();
+                float alphaRange = collapsingHeight * 0.17999999f;
+                float toolbarTitleAlphaStart = collapsingHeight * 0.35f;
 
                 if (mAppBarLayout.seslIsCollapsed()) {
                     mActionModeTitleTextView.setAlpha(1.0f);
                 } else {
+                    // حماية ضد القسمة على صفر
+                    if (alphaRange <= 0f) {
+                        mActionModeTitleTextView.setAlpha(1.0f);
+                        return;
+                    }
+
                     float collapsedTitleAlpha = ((150.0f / alphaRange)
                             * (((float) layoutPosition) - toolbarTitleAlphaStart));
 
-                    if (collapsedTitleAlpha >= 0.0f && collapsedTitleAlpha <= 255.0f) {
-                        collapsedTitleAlpha /= 255.0f;
-                        mActionModeTitleTextView.setAlpha(collapsedTitleAlpha);
-                    } else if (collapsedTitleAlpha < 0.0f)
+                    // نقيّد القيمة أولاً إلى 0..255 ثم نحول إلى 0..1
+                    if (collapsedTitleAlpha < 0.0f) {
                         mActionModeTitleTextView.setAlpha(0.0f);
-                    else
-                        mActionModeTitleTextView.setAlpha(1.0f);
+                    } else {
+                        float clamped255 = collapsedTitleAlpha > 255.0f ? 255.0f : collapsedTitleAlpha;
+                        mActionModeTitleTextView.setAlpha(clamped255 / 255.0f);
+                    }
                 }
             }
         }
     }
 
-}
+    }
